@@ -1,0 +1,35 @@
+.container{
+    width: 500px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;  
+    margin: auto;
+}
+
+*{
+     background-color: aqua;
+}
+
+.headers{
+   font-weight: 700;
+   margin-bottom: 20px;
+}
+
+.inBox{
+    margin:20px;
+}
+
+.btn{
+    background-color:'black'
+}
+
+.inp{
+    border: 2px solid #eee;
+}
+
+.lgn{
+    background-color:'black',
+    
+}
