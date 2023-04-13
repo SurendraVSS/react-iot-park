@@ -9,6 +9,7 @@ import HomePage from './components/pages/HomePage'
 import './App.css'
 import Main from './components/pages/Main'
 import Payment from './components/pages/Payment'
+import PaymentSuccess from './components/pages/PaymentSuccess'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/Main" element={<Main />} />
         <Route path="/Payment" element={<Payment />} />
+        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
         {/* <Footer /> */}
       

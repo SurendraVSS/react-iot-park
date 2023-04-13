@@ -11,7 +11,7 @@ export default function SignInPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     function handleLogin() {
-        axios.post('http://43.207.189.44:3009/api/login', {
+        axios.post('https://smartpaarkingbackendiot.onrender.com/api/login', {
             "email": email,
             "password": password
         })
@@ -37,34 +37,36 @@ export default function SignInPage() {
             })
     }
     return (
-        <div className="clr">
-            <div className="container">
+        <div style={{ margin: 'auto', width: '50%', border: '1px solid', padding: '10px', marginTop: '150px', backgroundColor: 'red', borderRadius: '25px' }}>
+            <div>
 
+                <div style={{ backgroundColor: 'red' }}>
+                    <div className="text-center m-5-auto" style={{ backgroundColor: 'red' }}>
+                        <h2 className='headers' style={{ backgroundColor: 'red' }}>Sign in to us</h2>
 
-                <div className="text-center m-5-auto">
-                    <h2 className='headers'>Sign in to us</h2>
-
-                    <p className='inBox'>
-                        <label>Email Address :- </label>
-                        <input className='inp' type="text" name="first_name" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    </p>
-                    <p className='inBox'>
-                        <label>Password :-</label>
-                        {/* <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
+                        <p className='inBox' style={{ backgroundColor: 'red' }}>
+                            <label style={{ backgroundColor: 'red' }}>Email Address :- </label>
+                            <input style={{ backgroundColor: 'red' }} className='inp' type="text" name="first_name" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        </p>
+                        <p className='inBox' style={{ backgroundColor: 'red' }}>
+                            <label style={{ backgroundColor: 'red' }}>Password :-</label>
+                            {/* <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
                     <br /> */}
-                        <input className='inp' type="password" name="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
-                    </p>
-                    <p className='inBox btn'>
-                        <button onClick={handleLogin} className="lgn">Login</button>
-                    </p>
+                            <input style={{ backgroundColor: 'red' }} className='inp' type="password" name="password" value={password} required onChange={(e) => setPassword(e.target.value)} />
+                        </p>
+                        <p className='inBox btn' style={{ backgroundColor: 'red' }}>
+                            <button onClick={handleLogin} className="btns">Login</button>
+                        </p>
 
-                    <footer>
-                        <p>First time? <Link to="/register">Create an account</Link>.</p>
+                        <footer style={{ backgroundColor: 'red' }}>
+                            <p style={{ backgroundColor: 'red' }}>First time? <Link to="/register" style={{ backgroundColor: 'red' }}>Create an account</Link>.</p>
 
-                    </footer>
+                        </footer>
+                    </div>
                 </div>
+
             </div>
         </div>
-      
+
     )
 }

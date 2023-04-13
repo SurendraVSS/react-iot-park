@@ -1,85 +1,56 @@
 import React from 'react'
+import { Box, Stack } from "@chakra-ui/react"
+import Card from './Card'
+import axios from "axios";
 
 
-function loadScript(src) {
-    return new Promise((resolve) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.onload = () => {
-            resolve(true);
-        };
-        script.onerror = () => {
-            resolve(false);
-        };
-        document.body.appendChild(script);
-    });
-}
+const Payment = () => {
 
 
-export default function Payment() {
+    const checkoutHandler = async (amount) => {
 
-    async function showRazorpay() {
-        const res = await loadScript(
-            "https://checkout.razorpay.com/v1/checkout.js"
-        );
+        const { data: { key } } = await axios.get("https://rozorpaychinmay.onrender.com/api/getkey")
 
-        if (!res) {
-            alert("Razorpay SDK failed to load. Are you online?");
-            return;
-        }
-
-        const data = await fetch("http://43.207.189.44:3009/razorpay", {
-            method: "POST",
-        }).then((t) => t.json());
-
-        console.log(data);
+        const { data: { order } } = await axios.post("https://rozorpaychinmay.onrender.com/api/checkout", {
+            'amount':80
+        })
 
         const options = {
-            key: "rzp_test_ddWubyGOUv3P5e",
-            currency: data.currency,
-            amount: data.amount.toString(),
-            order_id: data.id,
-            name: "Donation",
-            description: "Thank you for nothing. Please give us some money",
-            handler: function (response) {
-                // alert(response.razorpay_payment_id);
-                // alert(response.razorpay_order_id);
-                // alert(response.razorpay_signature);
-
-                alert("Transaction successful");
-            },
+            key,
+            amount: order.amount,
+            currency: "INR",
+            name: "Chinmay Programmer",
+            description: "Tutorial of RazorPay",
+            image: "https://avatars.githubusercontent.com/u/25058652?v=4",
+            order_id: order.id,
+            callback_url: "http://localhost:4000/api/paymentverification",
             prefill: {
-                name: "Rajat",
-                email: "rajat@rajat.com",
-                phone_number: "9899999999",
+                name: "Gaurav Kumar",
+                email: "gaurav.kumar@example.com",
+                contact: "9999999999"
             },
+            notes: {
+                "address": "Razorpay Corporate Office"
+            },
+            theme: {
+                "color": "#121212"
+            }
         };
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
+        const razor = new window.Razorpay(options);
+        razor.open();
     }
-  return (
-      <div className="App">
-          {/* <header className="App-header">
-              <p>Razorpay payment portal ezzzz</p>
-              <a
-                  className="App-link"
-                  onClick={showRazorpay}
-                  target="_blank"
-                  rel="noopener noreferrer"
-              >
-                  Pay now
-              </a>
 
-              <button onClick={() => showRazorpay()}>Pay now</button>
-          </header> */}
+    return (
+        <Box>
 
-          <div>
-            <h1 style={{justifyContent: 'center',alignItems: 'center', textAlign:'center',marginTop:'30px'}}>Pay vai the scanner Rs 80/- only per day</h1>
-            <div style={{justifyContent: 'center',alignItems: 'center',display: 'flex', marginTop:'20px'}}>
-                  <img src={require("./payment.png")} alt="" />
-            </div>
-           
-          </div>
-      </div>
-  )
+            <Stack h={"100vh"} alignItems="center" justifyContent="center" direction={["column", "row"]}>
+
+               
+                <Card amount={80} img={"https://img.freepik.com/free-vector/reserve-parking-space-curbside-pickup-abstract-concept-illustration-customer-walk-pickup-station-customers-arrival-keep-employees-safe-small-business_335657-3337.jpg?w=2000"} checkoutHandler={checkoutHandler} />
+
+            </Stack>
+        </Box>
+    )
 }
+
+export default Payment
